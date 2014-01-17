@@ -64,17 +64,6 @@ $(function() {
       }
     },
 
-    saveAddressModel: function() {
-      if (this.$el.valid()) {
-        var addrName = this.$el.find('#addr-name').val();
-        var addrEmail = this.$el.find('#addr-email').val();
-        this.model.save({addrName: addrName, addrEmail: addrEmail});
-        return true;
-      } else {
-        return false;
-      }
-    }
-
   });
 
 
