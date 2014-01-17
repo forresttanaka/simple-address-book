@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+  <script type="text/template" id="addr-data-template">
+    <button class="del-button">x</button>
+    <div class="form-group">
+      <label for="addrName">Name</label>
+      <input type="text" class="form-control" name="addrName" id="addr-name" value="<%= name %>">
+    </div>
+    <div class="form-group">
+      <label for="addrEmail">Email</label>
+      <input type="email" class="form-control" name="addrEmail" id="addr-email" value="<%= email %>">
+    </div>
+    <button class="save-button">Save</button>
+  </script>
+
+  <div class="content">
+    <div class="row">
+      <div id="addr-panel" class="col-sm-4">
+        <div id="addr-data">
+        </div>
+        <button id="add-button">+</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-1.10.2.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script src="js/backbone-min.js"></script>
+  <script src="js/backbone.localStorage-min.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
