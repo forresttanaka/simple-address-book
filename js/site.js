@@ -42,7 +42,7 @@ $(function() {
     },
 
     // Delete model associated with this View, and remove View from DOM.
-    // Removes model from all owning Collections, or the AddressBook in this case.
+    // Removes model from all owning Collections, the AddressBook in this case.
     delAddress: function(e) {
       e.preventDefault();
       this.model.destroy();
@@ -61,6 +61,17 @@ $(function() {
         var addrName = form.find('#addr-name').val();
         var addrEmail = form.find('#addr-email').val();
         this.model.save({addrName: addrName, addrEmail: addrEmail});
+      }
+    },
+
+    saveAddressModel: function() {
+      if (this.$el.valid()) {
+        var addrName = this.$el.find('#addr-name').val();
+        var addrEmail = this.$el.find('#addr-email').val();
+        this.model.save({addrName: addrName, addrEmail: addrEmail});
+        return true;
+      } else {
+        return false;
       }
     }
 
@@ -83,6 +94,7 @@ $(function() {
 
     // Keep an eye out for changes on the #addr-panel div
     el: $('#addr-panel'),
+    addrViews: [],
 
     // Set up a new collection for this view, and bind the 'add' event
     // to the function to render one address
@@ -100,8 +112,14 @@ $(function() {
 
     // Create a new address and add it to our collection
     addAddress: function() {
-      var addr = new Address();
-      this.addressBook.add(addr);
+      var success = _.every(this.addrViews, function(item) {
+        return item.saveAddressModel();
+      }, this);
+
+      if (success) {
+        var addr = new Address();
+        this.addressBook.add(addr);
+      }
     },
 
     // Render the entire address book
@@ -116,6 +134,7 @@ $(function() {
     renderAddress: function(address) {
       var addressView = new AddressView({ model: address });
       this.$el.find('#add-button').before(addressView.render().el);
+      this.addrViews.push(addressView);
     }
 
   });
