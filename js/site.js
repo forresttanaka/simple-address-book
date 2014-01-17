@@ -123,7 +123,7 @@ $(function() {
 
   //********************************************************************************
   // Create and render entire address book
-  var addressView = new AddressBookView();
+  var addressBookView = new AddressBookView();
 
   // Change default form validation messages
   $.extend($.validator.messages, {
