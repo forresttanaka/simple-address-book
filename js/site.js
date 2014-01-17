@@ -94,7 +94,6 @@ $(function() {
 
     // Keep an eye out for changes on the #addr-panel div
     el: $('#addr-panel'),
-    addrViews: [],
 
     // Set up a new collection for this view, and bind the 'add' event
     // to the function to render one address
@@ -112,14 +111,8 @@ $(function() {
 
     // Create a new address and add it to our collection
     addAddress: function() {
-      var success = _.every(this.addrViews, function(item) {
-        return item.saveAddressModel();
-      }, this);
-
-      if (success) {
-        var addr = new Address();
-        this.addressBook.add(addr);
-      }
+      var addr = new Address();
+      this.addressBook.add(addr);
     },
 
     // Render the entire address book
@@ -134,7 +127,6 @@ $(function() {
     renderAddress: function(address) {
       var addressView = new AddressView({ model: address });
       this.$el.find('#add-button').before(addressView.render().el);
-      this.addrViews.push(addressView);
     }
 
   });
