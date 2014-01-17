@@ -7,8 +7,8 @@ $(function() {
   var Address = Backbone.Model.extend({
 
     defaults: {
-      name: '', // Name of contact
-      email: '' // Email address of contact
+      addrName: '', // Name of contact
+      addrEmail: '' // Email address of contact
     },
 
   });
@@ -43,7 +43,8 @@ $(function() {
 
     // Delete model associated with this View, and remove View from DOM.
     // Removes model from all owning Collections, or the AddressBook in this case.
-    delAddress: function() {
+    delAddress: function(e) {
+      e.preventDefault();
       this.model.destroy();
       this.remove();
     },
@@ -51,11 +52,16 @@ $(function() {
     // Called when any field value changes in the form. Save the changed field
     // into the corresponding attribute of our model
     saveAddress: function(e) {
-      // Changed element in 'e' parm. Get its attribute name. We made attr name match
-      // corresponding model member name
-      var addrName = $(e.target).prev().find('#addr-name').val();
-      var addrEmail = $(e.target).prev().find('#addr-email').val();
-      this.model.set({name: addrName, email: addrEmail});
+      e.preventDefault();
+
+      var form = $(e.target).parent();
+      if (form.valid()) {
+        // Changed element in 'e' parm. Get its attribute name. We made attr name match
+        // corresponding model member name
+        var addrName = form.find('#addr-name').val();
+        var addrEmail = form.find('#addr-email').val();
+        this.model.save({addrName: addrName, addrEmail: addrEmail});
+      }
     }
 
   });
@@ -82,6 +88,7 @@ $(function() {
     // to the function to render one address
     initialize: function() {
       this.addressBook = new AddressBook();
+      this.addressBook.fetch();
       this.addressBook.on('add', this.renderAddress, this);
       this.render();
     },
@@ -117,5 +124,11 @@ $(function() {
   //********************************************************************************
   // Create and render entire address book
   var addressView = new AddressBookView();
+
+  // Change default form validation messages
+  $.extend($.validator.messages, {
+    required: "",
+    email: ""
+  });
 
 });

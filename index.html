@@ -4,35 +4,37 @@
   <meta charset="utf-8">
   <title></title>
   <meta name="description" content="">
+  <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
   <script type="text/template" id="addr-data-template">
-    <button class="del-button">x</button>
+    <button class="del-button text-hide">Delete</button>
     <div class="form-group">
       <label for="addrName">Name</label>
-      <input type="text" class="form-control" name="addrName" id="addr-name" value="<%= name %>">
+      <input type="text" class="form-control required" name="addrName" id="addr-name" value="<%= addrName %>">
     </div>
     <div class="form-group">
       <label for="addrEmail">Email</label>
-      <input type="email" class="form-control" name="addrEmail" id="addr-email" value="<%= email %>">
+      <input type="email" class="form-control required" name="addrEmail" id="addr-email" value="<%= addrEmail %>">
     </div>
-    <button class="save-button">Save</button>
+    <button class="save-button btn btn-default pull-right">Save</button>
   </script>
 
-  <div class="content">
+  <div class="container">
     <div class="row">
-      <div id="addr-panel" class="col-sm-4">
-        <div id="addr-data">
+        <div id="addr-panel" class="col-sm-6 col-md-5 col-lg-4 addr-panel">
+          <div id="addr-data">
+          </div>
+          <button id="add-button" class="add-button btn btn-default">+</button>
         </div>
-        <button id="add-button">+</button>
-      </div>
     </div>
   </div>
 
   <script src="js/jquery-1.10.2.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/underscore-min.js"></script>
   <script src="js/backbone-min.js"></script>
